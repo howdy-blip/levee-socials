@@ -37,7 +37,7 @@
         "id": "1773303130288",
         "text": "test",
         "priority": "medium",
-        "done": true
+        "done": false
       }
     ],
     "refImage": null,
