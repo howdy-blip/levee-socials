@@ -1,0 +1,46 @@
+{
+  "2026-02": {
+    "fb": {
+      "impressions": 36549,
+      "impressionsGrowthPct": 382,
+      "reach": 13280,
+      "reachGrowthPct": 490.5,
+      "interactions": 609,
+      "interactionsGrowthPct": 387.2,
+      "newFollows": 24,
+      "newFollowsPct": 118.2,
+      "linkClicks": 5,
+      "linkClicksGrowthPct": 25,
+      "profileVisits": 1100,
+      "profileVisitsGrowthPct": 57.9,
+      "postsPublished": 11,
+      "storiesPublished": 12
+    },
+    "ig": {
+      "impressions": 15448,
+      "impressionsGrowthPct": 93,
+      "reach": 1600,
+      "reachGrowthPct": 93.9,
+      "interactions": 305,
+      "interactionsGrowthPct": 643.9,
+      "newFollows": 50,
+      "newFollowsPct": 284.6,
+      "linkClicks": 0,
+      "linkClicksGrowthPct": 0,
+      "profileVisits": 315,
+      "profileVisitsGrowthPct": 100.6,
+      "postsPublished": 9,
+      "storiesPublished": 17
+    },
+    "items": [
+      {
+        "id": "1773303130288",
+        "text": "test",
+        "priority": "medium",
+        "done": true
+      }
+    ],
+    "refImage": null,
+    "notes": ""
+  }
+}
