@@ -32,7 +32,14 @@
       "postsPublished": 9,
       "storiesPublished": 17
     },
-    "items": [],
+    "items": [
+      {
+        "id": "1773362024812",
+        "text": "Reached out to Launceston Central to update imagery for Levee Food Co. as outdated (prior to Jords / Alex owning)",
+        "priority": "medium",
+        "done": false
+      }
+    ],
     "refImage": null,
     "notes": ""
   }
