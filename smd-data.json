@@ -32,14 +32,7 @@
       "postsPublished": 9,
       "storiesPublished": 17
     },
-    "items": [
-      {
-        "id": "1773303130288",
-        "text": "test",
-        "priority": "medium",
-        "done": false
-      }
-    ],
+    "items": [],
     "refImage": null,
     "notes": ""
   }
