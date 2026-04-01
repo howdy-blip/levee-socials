@@ -1,4 +1,41 @@
 {
+  "2026-03": {
+    "fb": {
+      "impressions": 20526,
+      "impressionsGrowthPct": -46.1,
+      "reach": 7575,
+      "reachGrowthPct": -44.2,
+      "interactions": 216,
+      "interactionsGrowthPct": -66,
+      "newFollows": 18,
+      "newFollowsPct": -28,
+      "linkClicks": 1,
+      "linkClicksGrowthPct": -83.3,
+      "profileVisits": 999,
+      "profileVisitsGrowthPct": -16,
+      "postsPublished": 0,
+      "storiesPublished": 0
+    },
+    "ig": {
+      "impressions": 12803,
+      "impressionsGrowthPct": -19.4,
+      "reach": 988,
+      "reachGrowthPct": -40.4,
+      "interactions": 271,
+      "interactionsGrowthPct": -12.6,
+      "newFollows": 15,
+      "newFollowsPct": -70,
+      "linkClicks": 0,
+      "linkClicksGrowthPct": 0,
+      "profileVisits": 218,
+      "profileVisitsGrowthPct": -32.9,
+      "postsPublished": 0,
+      "storiesPublished": 0
+    },
+    "items": [],
+    "refImage": null,
+    "notes": "Data sourced from Meta Business Suite — March 1–31, 2026.\n\nNote: All month-on-month comparisons show declines versus February, but February data was heavily skewed by a viral post that drove outsized reach and engagement. March figures better reflect the underlying baseline of regular organic posting activity."
+  },
   "2026-02": {
     "fb": {
       "impressions": 36549,
