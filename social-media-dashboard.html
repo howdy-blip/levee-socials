@@ -222,6 +222,22 @@
     /* ── Notes ─────────────────────────────────────────── */
     .ncard { background: var(--card); border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow); }
     .ncard h2 { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+
+    /* ── Top Content ───────────────────────────────────── */
+    .tccard { background: var(--card); border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .tccard h2 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+    .tc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .tc-post { border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+    .tc-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .tc-platform { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+    .tc-platform.fb { background: rgba(24,119,242,0.12); color: #1877F2; }
+    .tc-platform.ig { background: rgba(225,48,108,0.12); color: #E1306C; }
+    .tc-date { font-size: 11px; color: var(--muted); }
+    .tc-text { font-size: 13px; line-height: 1.5; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .tc-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .tc-stat { font-size: 11px; color: var(--muted); background: #f3f4f6; border-radius: 6px; padding: 3px 8px; }
+    .tc-stat strong { color: var(--text); font-weight: 600; }
+    .tc-empty { color: var(--muted); font-size: 13px; }
     .nta { width: 100%; min-height: 96px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 13px; font-family: 'Inter', sans-serif; line-height: 1.65; resize: vertical; outline: none; transition: border-color 0.18s; color: var(--text); }
     .nta:focus { border-color: var(--purple); }
 
@@ -310,7 +326,7 @@
     @media print {
       .hdr-acts, .add-form, .adel, .img-drop { display: none !important; }
       body, .main { background: white; }
-      .pc, .kc, .cc, .acard, .ncard { box-shadow: none; border: 1px solid #e5e7eb; }
+      .pc, .kc, .cc, .acard, .ncard, .tccard { box-shadow: none; border: 1px solid #e5e7eb; }
     }
   </style>
 </head>
@@ -533,6 +549,13 @@
   <div class="cc full">
     <div class="cc-title">Content Published This Month — Posts & Stories</div>
     <canvas id="contentChart" height="90"></canvas>
+  </div>
+
+  <!-- Top Content -->
+  <div class="slbl">Top Content</div>
+  <div class="tccard">
+    <h2>⭐ Top Posts This Month</h2>
+    <div id="tcList"></div>
   </div>
 
   <!-- Action Items -->
@@ -873,6 +896,7 @@ function render() {
   fillForm(data);
   updateKPIs(data);
   renderCharts(data);
+  renderTopContent(data.topContent || []);
   renderItems(data.items || []);
   document.getElementById('notesTA').value = data.notes || '';
   renderImage(data.refImage);
@@ -893,6 +917,34 @@ function fillForm(data) {
 
 function sv(p, f, v) { const d = getM(); d[p][f] = Number(v)||0; putM(d); updateKPIs(d); renderCharts(d); }
 function saveNotes(v) { const d = getM(); d.notes = v; putM(d); }
+
+// ─── Top Content ──────────────────────────────────────────────────────────────
+function renderTopContent(posts) {
+  const el = document.getElementById('tcList');
+  if (!posts || !posts.length) {
+    el.innerHTML = '<p class="tc-empty">No top content recorded for this month.</p>';
+    return;
+  }
+  el.innerHTML = '<div class="tc-grid">' + posts.map(p => {
+    const plat = p.platform === 'fb' ? 'Facebook' : 'Instagram';
+    const stats = [
+      p.views     != null ? `<span class="tc-stat">👁 <strong>${fmt(p.views)}</strong> views</span>`            : '',
+      p.viewers   != null ? `<span class="tc-stat">👤 <strong>${fmt(p.viewers)}</strong> viewers</span>`        : '',
+      p.interactions != null ? `<span class="tc-stat">💬 <strong>${p.interactions}</strong> interactions</span>` : '',
+      p.likes     != null ? `<span class="tc-stat">❤️ <strong>${p.likes}</strong> likes</span>`                 : '',
+      p.comments  != null ? `<span class="tc-stat">💭 <strong>${p.comments}</strong> comments</span>`           : '',
+      p.follows   != null ? `<span class="tc-stat">➕ <strong>${p.follows}</strong> follows</span>`             : '',
+    ].filter(Boolean).join('');
+    return `<div class="tc-post">
+      <div class="tc-head">
+        <span class="tc-platform ${p.platform}">${plat}</span>
+        <span class="tc-date">${p.timeLabel}</span>
+      </div>
+      <div class="tc-text">${p.text}</div>
+      <div class="tc-stats">${stats}</div>
+    </div>`;
+  }).join('') + '</div>';
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function fmt(n) {
@@ -1069,6 +1121,11 @@ function resetMonth() {
             interactions:271, interactionsGrowthPct:-12.6, newFollows:15, newFollowsPct:-70,
             linkClicks:0, linkClicksGrowthPct:0, profileVisits:218, profileVisitsGrowthPct:-32.9,
             postsPublished:0, storiesPublished:0 },
+      topContent: [
+        { platform:'fb', timeLabel:'Mon Mar 16, 11:45am',
+          text:'We\'ve locked in our Chicken Risotto for Meal of the Week. There\'s a reason this one\'s been popular lately. Pan-seared chicken, chor…',
+          views:1601, viewers:1095, interactions:19, likes:15, comments:4, follows:2 }
+      ],
       items: [], refImage: null,
       notes: 'Data sourced from Meta Business Suite — March 1–31, 2026.\n\nNote: All month-on-month comparisons show declines versus February, but February data was heavily skewed by a viral post that drove outsized reach and engagement. March figures better reflect the underlying baseline of regular organic posting activity.'
     };
